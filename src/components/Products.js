@@ -2,6 +2,7 @@ import React, { useEffect, useCallback, useState } from 'react';
 import { useAppContext } from "../context/AppContext";
 import { BACKEND_URL } from "../utils/constants";
 import { toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
 
 function Products() {
    const {
@@ -18,6 +19,8 @@ function Products() {
        [page, setPage] = useState(1),
        [searchTerm, setSearchTerm] = useState(""),
        [loading, setLoading] = useState(true);
+
+   const navigate = useNavigate();
 
    // useCallback function won't be re-created on re-rendering
    const catalogueProducts = useCallback(() => {
@@ -158,7 +161,9 @@ function Products() {
              </div>
           </ul>
           <center className="d-flex justify-content-center mt-5 mb-4">
-             <button className="btn btn-success px-5 py-2" onClick={() => alert('Proceeding to checkout...')}>
+             <button className="btn btn-success px-5 py-2"
+                     disabled={totalItems === 0}
+                     onClick={() => navigate('/checkout')}>
                 Checkout
              </button>
           </center>

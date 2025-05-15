@@ -43,8 +43,8 @@ export default function Checkout() {
              <ul className="list-group">
                 {cartItems.map((item) => (
                     <li key={item.productId} className="list-group-item d-flex justify-content-between align-items-center">
-                       {item.name} x {item.quantity}
-                       <span>${truncateToTwoDecimals(item.price * item.quantity)}</span>
+                       {item.product.name} x {item.quantity}
+                       <span>${truncateToTwoDecimals(item.product.price * item.quantity)}</span>
                     </li>
                 ))}
              </ul>
@@ -85,7 +85,7 @@ export default function Checkout() {
           </div>
 
           <button
-              className="btn btn-success w-100"
+              className="btn btn-success w-100 mt-4"
               onClick={() => setShowModal(true)}
           >
              Place Order
