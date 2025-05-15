@@ -113,7 +113,7 @@ export const AppProvider = ({ children }) => {
                 toast.success(
                     <Fragment>
                        <div className="toastify-header">
-                          <h6 className="toast-title">Cart Updated Successfully.</h6>
+                          <center className="toast-title">Cart Updated Successfully.</center>
                        </div>
                     </Fragment>
                 );

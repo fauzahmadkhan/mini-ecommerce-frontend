@@ -25,8 +25,9 @@ function App() {
            pauseOnFocusLoss={false}
            pauseOnHover
            transition={Slide}
-           position="top-center"
+           position="top-right"
            newestOnTop={true}
+           limit={1}
        />
     </AppProvider>
   );

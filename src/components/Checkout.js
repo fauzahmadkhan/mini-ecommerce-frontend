@@ -28,7 +28,7 @@ export default function Checkout() {
       toast.success(
           <Fragment>
              <div className="toastify-header">
-                <h6 className="toast-title">Order Placed!</h6>
+                <center className="toast-title">Order Placed!</center>
              </div>
           </Fragment>
       );
