@@ -7,7 +7,7 @@ function Products() {
    const {
       products,
       setProducts,
-      cart,
+      cartItems,
       addToCart,
       totalItems,
       totalPrice,
@@ -31,23 +31,22 @@ function Products() {
       });
 
       const requestOptions = {
-         method: "PUT",
+         method: "POST",
          headers: catalogueProductsHeaders,
          body: raw,
          redirect: "follow",
       };
 
-      fetch(`${BACKEND_URL}/product/catalogue?pageSize=${pageSize}&page=${page}`, requestOptions)
+      fetch(`${BACKEND_URL}/v3/products/catalogue?pageSize=${pageSize}&page=${page}`, requestOptions)
           .then((response) => response.text())
           .then((result) => JSON.parse(result))
           .then((obj) => {
              const productsResponse = obj?.data || [];
 
-             if (!obj?.data?.message) {
-                console.log('productsResponse?.response', productsResponse?.response);
+             if (obj?.success) {
                 setProducts(productsResponse?.response);
                 setLoading(false);
-             } else if (obj && !obj.success && productsResponse?.message) {
+             } else if (productsResponse?.message) {
                 toast.error(
                     <div>
                        <div className="toastify-header">
@@ -135,7 +134,7 @@ function Products() {
           <h4 className="mt-3">Total Price ${totalPrice}</h4>
           <ul className="list-group">
              <div className="row">
-                {cart.map((item) => (
+                {cartItems.map((item) => (
                     <div className="col-md-4 mb-4" key={item.product._id}>
                        <div className="card h-100 position-relative">
                           <span className="badge bg-primary position-absolute top-0 end-0 m-2">
@@ -157,12 +156,12 @@ function Products() {
                     </div>
                 ))}
              </div>
-             {/*{cart.map((item, index) => (*/}
-             {/*    <li key={index} className="list-group-item">*/}
-             {/*       {item.product.name} - ${item.product.price}*/}
-             {/*    </li>*/}
-             {/*))}*/}
           </ul>
+          <center className="d-flex justify-content-center mt-5 mb-4">
+             <button className="btn btn-success px-5 py-2" onClick={() => alert('Proceeding to checkout...')}>
+                Checkout
+             </button>
+          </center>
        </div>
    );
 }
